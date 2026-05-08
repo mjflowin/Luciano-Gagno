@@ -178,7 +178,7 @@ const Hero = () => {
           <div className="lg:col-span-5 flex justify-center lg:justify-start items-start pt-16 lg:pt-8 lg:-ml-12 relative">
              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }} style={{ x: smoothX, y: smoothY, willChange: 'transform' }} className="relative w-full max-w-[340px] md:max-w-[400px] lg:max-w-[460px] group flex justify-center">
                 <div className="w-full relative flex items-end justify-center">
-                   <img src="/luciano gagno.png" alt="Dr. Luciano Gagno" className="w-full h-auto object-contain object-bottom grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-105 transform transition-transform duration-700 origin-top" style={{ willChange: 'transform, filter' }} referrerPolicy="no-referrer" loading="eager" />
+                   <img src="/luciano gagno.png" alt="Dr. Luciano Gagno" className="w-full h-auto object-contain object-bottom grayscale-0 lg:grayscale opacity-100 lg:opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transform transition-all duration-700 origin-top" style={{ willChange: 'transform, filter' }} referrerPolicy="no-referrer" loading="eager" />
                    <div className="absolute bottom-6 w-full flex justify-center pointer-events-none px-2 lg:px-4">
                      <p className="text-white font-serif text-[1.1rem] sm:text-2xl md:text-3xl lg:text-[1.8rem] italic opacity-90 leading-snug w-[100%] mx-auto text-center" style={{ textShadow: "0px 4px 20px rgba(0,0,0,0.9), 0px 2px 5px rgba(0,0,0,1)" }}>"A prevenção não tem preço.<br/> O litígio tem custo."</p>
                    </div>
@@ -283,7 +283,7 @@ const About = () => {
        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
           <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 1 }} className="relative flex justify-center items-end">
              <div className="w-full max-w-[340px] md:max-w-[420px] lg:max-w-[460px] mx-auto relative z-10">
-                <img src="/luciano.png" alt="Dr. Luciano Gagno" className="w-full h-auto object-contain object-bottom grayscale opacity-80 hover:grayscale-0 hover:scale-105 transform transition-transform duration-700 origin-bottom" style={{ willChange: 'transform, filter' }} referrerPolicy="no-referrer" loading="lazy" />
+                <img src="/luciano.png" alt="Dr. Luciano Gagno" className="w-full h-auto object-contain object-bottom grayscale-0 lg:grayscale opacity-100 lg:opacity-80 hover:grayscale-0 hover:opacity-100 hover:scale-105 transform transition-all duration-700 origin-bottom" style={{ willChange: 'transform, filter' }} referrerPolicy="no-referrer" loading="lazy" />
              </div>
              
              {/* Decor */}
