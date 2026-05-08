@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+  --color-gold-400: #F3E5AB;
+  --color-gold-500: #D4AF37;
+  --color-gold-600: #AA8C2C;
+  --color-gold-700: #806921;
+  --color-black-pure: #000000;
+  --color-black-bg: #050505;
+  --color-black-card: #0A0A0A;
+  --color-black-border: #1F1F1F;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-black-bg);
+    color: #EAEAEA;
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+  }
+  
+  @media (pointer: fine) {
+    body, a, button {
+      cursor: none;
+    }
+  }
+  
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-black-bg); 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-black-border); 
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gold-500); 
+  }
+}
+
+.noise {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAD///////////////////////////8R4HnTAAAABXRSTlMAAwUGBx82wXkAAAJiSURBVDjLhVS9a9tAEP893eDiwAks7ZAgY6cOnQokbRQ81CHQIWihDqZCoEOgQ6BDoENQ1CHQoaChDqZDQENBp0CHQKdAx0CHoKFD4K+O7yT52z5IOq/3+/127yQAQFEUBQAUyLL0n/4vUBTF/4iiKAqgKIr/EYqiKICiyP8jyrL8D1EUWQGKotA/oiheASiK4guIoigEUBTF/xBFUSiAosgNUBTFFUBRFN9AFEU2gKIoLIAoyjWgKIrPAMqyrAAURW4BRVG4AKIo+gOKokwAiqL4DKIosgQURTEBFEX2D1EUmQGKonAAoygyAhRF8QqgKMo3EEWRDaAoyjdQFMUgUBTZB1AUhQQojeIfIsuydUBRFC4BFEVWgKIovgEoiuwDiiI/QBRF9gAURVYARVEkAERRaIBGkvgHkSTJEFCWZSeAHMcrQJZlA4Asy+4ARVFcgCzLzgBRFOUAlufJAHAchwbIsuwTKIriAkCSpBsAiqKoAEVRvANwHOcOkCTpHyDLsitAlaoqQBTFVwBFURwCaCRJx4Asy24BKEnSHUAQhEsAiqJ4AuA4zgNQkqQXAMdxTQCqqloDRFE8AlCSpB8AiqIoACiK4h1AURSvAFRVtQiIongBUBQFBiAIAgSgqmodQFGUb4BqmoYAiqJoAFBV1QAAWZadAcqyXARYlm0AKIoXAEVRfAHgeV4DUBTFN4Cqqv4AAIIgsAIURU4Auq5bBlAURSZAlmUFIEEQVgAcx2kCWJatAigK4j/A87wOQFGUXgBBEKwAKt/3VwEURTYBFEXpBdA0zRiApmmGACzLegOgKLIJUBTFOwBN00wCiKLoBUiSZASgKIpJ01/JfwMAsaG2S8sZdwAAAABJRU5ErkJggg==");
+  background-repeat: repeat;
+}
+
+.glass-border {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(10, 10, 10, 0.4);
+}
