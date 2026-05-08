@@ -4,6 +4,18 @@ import { ShieldCheck, Briefcase, TrendingUp, Gavel, ArrowRight, ArrowUpRight, Sc
 
 const Noise = () => <div className="noise" />;
 
+const BackgroundScale = ({ className }: { className?: string }) => {
+  return (
+    <motion.div
+      className={`absolute pointer-events-none select-none z-0 ${className}`}
+      animate={{ rotate: [-3, 3, -3] }}
+      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+    >
+      <Scale className="w-full h-full stroke-[0.2]" />
+    </motion.div>
+  );
+};
+
 const CustomCursor = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -106,7 +118,7 @@ const Header = () => {
           ))}
         </nav>
         <Magnetic>
-          <a href="https://wa.me/5527999999999" target="_blank" rel="noreferrer" className="hidden lg:flex items-center gap-2 bg-white/5 border border-white/10 hover:bg-gold-500 hover:text-black hover:border-gold-500 px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all">
+          <a href="https://wa.me/5527998118489" target="_blank" rel="noreferrer" className="hidden lg:flex items-center gap-2 bg-white/5 border border-white/10 hover:bg-gold-500 hover:text-black hover:border-gold-500 px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all">
             Auditoria <ArrowUpRight size={14} />
           </a>
         </Magnetic>
@@ -132,12 +144,13 @@ const Hero = () => {
   }, [mouseX, mouseY]);
 
   return (
-    <section id="home" className="relative min-h-[100svh] flex items-center justify-center pt-20 overflow-hidden">
+    <section id="home" className="relative min-h-[100svh] flex items-start justify-center pt-32 lg:pt-44 overflow-hidden">
+       <BackgroundScale className="w-[120vh] h-[120vh] -left-[10vw] top-[5vh] text-gold-500/5" />
        <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
          <div className="w-[800px] h-[800px] bg-gold-600/10 rounded-full blur-[150px] mix-blend-screen" />
        </div>
-       <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 relative z-10 items-center">
-          <div className="lg:col-span-7 flex flex-col justify-center">
+       <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 relative z-10 items-start">
+          <div className="lg:col-span-7 flex flex-col justify-start pt-4 lg:pt-8 w-full max-w-[650px] mx-auto lg:mx-0">
              <div className="overflow-hidden mb-8 flex items-center gap-4">
                 <div className="h-[1px] w-12 bg-gold-500" />
                 <motion.span initial={{ y: "100%" }} animate={{ y: 0 }} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }} className="text-gold-500 font-bold uppercase tracking-[0.4em] text-[10px]">Private Legal Advisory</motion.span>
@@ -159,11 +172,11 @@ const Hero = () => {
                </Magnetic>
              </motion.div>
           </div>
-          <div className="lg:col-span-5 flex justify-center lg:justify-end items-end pt-12 lg:pt-0">
-             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }} style={{ x: smoothX, y: smoothY }} className="relative w-full max-w-[340px] md:max-w-[420px] lg:max-w-[460px] group flex justify-center">
+          <div className="lg:col-span-5 flex justify-center lg:justify-start items-start pt-16 lg:pt-0 lg:-ml-12">
+             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }} style={{ x: smoothX, y: smoothY }} className="relative w-full max-w-[340px] md:max-w-[400px] lg:max-w-[460px] group flex justify-center">
                 <div className="w-full relative flex items-end justify-center">
-                   <img src="/luciano gagno.png" alt="Dr. Luciano Gagno" className="w-full h-auto object-contain object-bottom grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-105 transform will-change-transform transition-all duration-700 drop-shadow-2xl origin-bottom" referrerPolicy="no-referrer" loading="eager" />
-                   <div className="absolute bottom-6 lg:bottom-12 w-full flex justify-center pointer-events-none px-0">
+                   <img src="/luciano gagno.png" alt="Dr. Luciano Gagno" className="w-full h-auto object-contain object-bottom grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-105 transform will-change-transform transition-all duration-700 drop-shadow-2xl origin-top" referrerPolicy="no-referrer" loading="eager" />
+                   <div className="absolute bottom-6 w-full flex justify-center pointer-events-none px-2 lg:px-4">
                      <p className="text-white font-serif text-[1.1rem] sm:text-2xl md:text-3xl lg:text-[1.8rem] italic opacity-90 leading-snug w-[100%] mx-auto text-center" style={{ textShadow: "0px 4px 20px rgba(0,0,0,0.9), 0px 2px 5px rgba(0,0,0,1)" }}>"A prevenção não tem preço.<br/> O litígio tem custo."</p>
                    </div>
                 </div>
@@ -215,8 +228,9 @@ const BentoCard = ({ title, desc, icon, delay, className }: any) => (
 );
 
 const BentoGrid = () => (
-   <section className="py-32 container mx-auto px-6 overflow-hidden" id="solucoes">
-      <div className="mb-16">
+   <section className="relative py-32 container mx-auto px-6 overflow-hidden" id="solucoes">
+      <BackgroundScale className="w-[120vh] h-[120vh] -left-[30vw] top-[10vh] text-white/5 opacity-50" />
+      <div className="mb-16 relative z-10">
         <span className="text-gold-500 font-bold uppercase tracking-[0.3em] text-[10px] block mb-4">Soluções Customizadas</span>
         <h2 className="text-4xl md:text-6xl font-serif text-white">Engenharia <span className="italic text-white/50 border-b border-gold-500/30">Corporativa</span></h2>
       </div>
@@ -237,7 +251,8 @@ const HorizontalScroll = () => {
   return (
     <section ref={ref} className="h-[300vh] relative bg-black-bg" id="método">
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden border-y border-white/5">
-        <div className="container mx-auto px-6 mb-8 mt-12 w-full"><span className="text-gold-500 font-bold uppercase tracking-[0.3em] text-[10px]">O Método LG</span></div>
+        <BackgroundScale className="w-[150vh] h-[150vh] left-[20vw] top-[-25vh] text-gold-500/5" />
+        <div className="container mx-auto px-6 mb-8 mt-12 w-full relative z-10"><span className="text-gold-500 font-bold uppercase tracking-[0.3em] text-[10px]">O Método LG</span></div>
         <motion.div style={{ x }} className="flex w-[300vw] h-full pb-32 items-center">
           {[ 
             { id: '01', t: 'Diagnóstico', st: 'Profundo', d: 'Mapeamento minucioso do cenário empresarial para prever litígios e passivos antes da ignição.' },
@@ -260,8 +275,9 @@ const HorizontalScroll = () => {
 
 const About = () => {
   return (
-    <section id="sobre" className="py-32 container mx-auto px-6 overflow-hidden border-t border-white/5">
-       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section id="sobre" className="relative py-32 container mx-auto px-6 overflow-hidden border-t border-white/5">
+       <BackgroundScale className="w-[100vh] h-[100vh] -right-[20vw] top-0 text-white/5" />
+       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
           <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 1 }} className="relative flex justify-center items-end">
              <div className="w-full max-w-[340px] md:max-w-[420px] lg:max-w-[460px] mx-auto relative z-10">
                 <img src="/luciano.png" alt="Dr. Luciano Gagno" className="w-full h-auto object-contain object-bottom grayscale opacity-80 hover:grayscale-0 hover:scale-105 transition-all duration-700 origin-bottom drop-shadow-2xl" referrerPolicy="no-referrer" loading="lazy" />
@@ -304,7 +320,7 @@ const Footer = () => (
          <div className="lg:col-span-2">
             <h3 className="font-serif text-4xl mb-6">Pronto para o<br/><span className="text-gold-500 italic">Próximo Nível?</span></h3>
             <p className="text-white/40 max-w-sm mb-8 font-light text-sm">Seu patrimônio não pode ficar à mercê do mercado. Solicite uma auditoria jurídica gratuita.</p>
-            <Magnetic><a href="https://wa.me/5527999999999" target="_blank" rel="noreferrer" className="inline-block bg-white text-black px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-gold-500 transition-all">Contato Imediato</a></Magnetic>
+            <Magnetic><a href="https://wa.me/5527998118489" target="_blank" rel="noreferrer" className="inline-block bg-white text-black px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-gold-500 transition-all">Contato Imediato</a></Magnetic>
          </div>
          <div>
             <h4 className="text-gold-500 text-[10px] uppercase tracking-[0.2em] font-bold mb-6">Expertise</h4>
@@ -319,7 +335,7 @@ const Footer = () => (
             <h4 className="text-gold-500 text-[10px] uppercase tracking-[0.2em] font-bold mb-6">Conexão</h4>
             <ul className="space-y-4 text-sm text-white/50">
               <li><a href="#" className="hover:text-white transition-colors">LinkedIn</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Instagram</a></li>
+              <li><a href="https://www.instagram.com/lucianogagnoadvogado/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Instagram</a></li>
               <li>Av. Corporate High, 1000 - Vitória/ES</li>
             </ul>
          </div>
