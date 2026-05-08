@@ -24,7 +24,9 @@ const CustomCursor = () => {
   const offset = useTransform(isHovering, [0, 1], [-8, -32]);
 
   useEffect(() => {
+    let rafId: number;
     const moveCursor = (e: MouseEvent) => {
+      // Direct update for maximum responsiveness without spring
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
     };
@@ -38,6 +40,7 @@ const CustomCursor = () => {
     return () => {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handleMouseOver);
+      cancelAnimationFrame(rafId);
     };
   }, [cursorX, cursorY, isHovering]);
 
@@ -51,10 +54,10 @@ const CustomCursor = () => {
         height: size,
         marginLeft: offset,
         marginTop: offset,
-        backgroundColor: 'rgba(212, 175, 55, 0.1)'
+        backgroundColor: 'rgba(212, 175, 55, 0.1)',
       }}
     >
-      <motion.div className="w-1.5 h-1.5 bg-gold-500 rounded-full will-change-transform transition-opacity duration-300" style={{ opacity: useTransform(isHovering, [0, 1], [1, 0]) }} />
+      <motion.div className="w-1.5 h-1.5 bg-gold-500 rounded-full will-change-transform" style={{ opacity: useTransform(isHovering, [0, 1], [1, 0]) }} />
     </motion.div>
   );
 };
@@ -131,26 +134,26 @@ const Header = () => {
 const Hero = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const smoothX = useSpring(mouseX, { damping: 20, stiffness: 400, mass: 0.5 });
-  const smoothY = useSpring(mouseY, { damping: 20, stiffness: 400, mass: 0.5 });
+  const smoothX = useSpring(mouseX, { damping: 40, stiffness: 400, mass: 0.1 });
+  const smoothY = useSpring(mouseY, { damping: 40, stiffness: 400, mass: 0.1 });
 
   useEffect(() => {
      const handleMouseMove = (e: MouseEvent) => {
-       mouseX.set((e.clientX / window.innerWidth - 0.5) * 30);
-       mouseY.set((e.clientY / window.innerHeight - 0.5) * 30);
+       mouseX.set((e.clientX / window.innerWidth - 0.5) * 15);
+       mouseY.set((e.clientY / window.innerHeight - 0.5) * 15);
      };
      window.addEventListener('mousemove', handleMouseMove, { passive: true });
      return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
   return (
-    <section id="home" className="relative min-h-[100svh] flex items-start justify-center pt-32 lg:pt-44 overflow-hidden">
+    <section id="home" className="relative min-h-[100svh] flex items-start justify-center pt-24 lg:pt-32 overflow-hidden">
        <BackgroundScale className="w-[120vh] h-[120vh] -left-[10vw] top-[5vh] text-gold-500/5" />
        <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
-         <div className="w-[800px] h-[800px] bg-gold-600/10 rounded-full blur-[150px] mix-blend-screen" />
+         <div className="w-[800px] h-[800px] rounded-full mix-blend-screen opacity-20" style={{ background: 'radial-gradient(circle, rgba(170,140,44,1) 0%, rgba(170,140,44,0) 70%)' }} />
        </div>
-       <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 relative z-10 items-start">
-          <div className="lg:col-span-7 flex flex-col justify-start pt-4 lg:pt-8 w-full max-w-[650px] mx-auto lg:mx-0">
+       <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 relative z-10 items-start">
+          <div className="lg:col-span-7 flex flex-col justify-start pt-8 w-full max-w-[650px] mx-auto lg:mx-0">
              <div className="overflow-hidden mb-8 flex items-center gap-4">
                 <div className="h-[1px] w-12 bg-gold-500" />
                 <motion.span initial={{ y: "100%" }} animate={{ y: 0 }} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }} className="text-gold-500 font-bold uppercase tracking-[0.4em] text-[10px]">Private Legal Advisory</motion.span>
@@ -172,10 +175,10 @@ const Hero = () => {
                </Magnetic>
              </motion.div>
           </div>
-          <div className="lg:col-span-5 flex justify-center lg:justify-start items-start pt-16 lg:pt-0 lg:-ml-12">
-             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }} style={{ x: smoothX, y: smoothY }} className="relative w-full max-w-[340px] md:max-w-[400px] lg:max-w-[460px] group flex justify-center">
+          <div className="lg:col-span-5 flex justify-center lg:justify-start items-start pt-16 lg:pt-8 lg:-ml-12 relative">
+             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }} style={{ x: smoothX, y: smoothY, willChange: 'transform' }} className="relative w-full max-w-[340px] md:max-w-[400px] lg:max-w-[460px] group flex justify-center">
                 <div className="w-full relative flex items-end justify-center">
-                   <img src="/luciano gagno.png" alt="Dr. Luciano Gagno" className="w-full h-auto object-contain object-bottom grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-105 transform will-change-transform transition-all duration-700 drop-shadow-2xl origin-top" referrerPolicy="no-referrer" loading="eager" />
+                   <img src="/luciano gagno.png" alt="Dr. Luciano Gagno" className="w-full h-auto object-contain object-bottom grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-105 transform transition-transform duration-700 origin-top" style={{ willChange: 'transform, filter' }} referrerPolicy="no-referrer" loading="eager" />
                    <div className="absolute bottom-6 w-full flex justify-center pointer-events-none px-2 lg:px-4">
                      <p className="text-white font-serif text-[1.1rem] sm:text-2xl md:text-3xl lg:text-[1.8rem] italic opacity-90 leading-snug w-[100%] mx-auto text-center" style={{ textShadow: "0px 4px 20px rgba(0,0,0,0.9), 0px 2px 5px rgba(0,0,0,1)" }}>"A prevenção não tem preço.<br/> O litígio tem custo."</p>
                    </div>
@@ -280,11 +283,11 @@ const About = () => {
        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
           <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 1 }} className="relative flex justify-center items-end">
              <div className="w-full max-w-[340px] md:max-w-[420px] lg:max-w-[460px] mx-auto relative z-10">
-                <img src="/luciano.png" alt="Dr. Luciano Gagno" className="w-full h-auto object-contain object-bottom grayscale opacity-80 hover:grayscale-0 hover:scale-105 transition-all duration-700 origin-bottom drop-shadow-2xl" referrerPolicy="no-referrer" loading="lazy" />
+                <img src="/luciano.png" alt="Dr. Luciano Gagno" className="w-full h-auto object-contain object-bottom grayscale opacity-80 hover:grayscale-0 hover:scale-105 transform transition-transform duration-700 origin-bottom" style={{ willChange: 'transform, filter' }} referrerPolicy="no-referrer" loading="lazy" />
              </div>
              
              {/* Decor */}
-             <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-full max-w-md h-64 bg-gold-600/20 rounded-full blur-[80px] z-0 pointer-events-none" />
+             <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-full max-w-md h-64 rounded-full pointer-events-none z-0 opacity-40 mix-blend-screen" style={{ background: 'radial-gradient(circle, rgba(170,140,44,0.5) 0%, rgba(170,140,44,0) 70%)' }} />
           </motion.div>
           
           <div>
@@ -314,7 +317,7 @@ const About = () => {
 
 const Footer = () => (
   <footer className="pt-32 pb-12 bg-black-bg border-t border-white/5 relative overflow-hidden">
-    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-600/5 blur-[120px] rounded-full pointer-events-none" />
+    <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none opacity-20 mix-blend-screen" style={{ background: 'radial-gradient(circle, rgba(170,140,44,0.3) 0%, rgba(170,140,44,0) 70%)' }} />
     <div className="container mx-auto px-6 relative z-10">
        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
          <div className="lg:col-span-2">
