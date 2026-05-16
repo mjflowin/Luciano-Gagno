@@ -337,9 +337,8 @@ const Footer = () => (
          <div>
             <h4 className="text-gold-500 text-[10px] uppercase tracking-[0.2em] font-bold mb-6">Conexão</h4>
             <ul className="space-y-4 text-sm text-white/50">
-              <li><a href="#" className="hover:text-white transition-colors">LinkedIn</a></li>
               <li><a href="https://www.instagram.com/lucianogagnoadvogado/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Instagram</a></li>
-              <li>Av. Corporate High, 1000 - Vitória/ES</li>
+              <li><a href="https://wa.me/5527998118489" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">WhatsApp</a></li>
             </ul>
          </div>
        </div>
