@@ -328,10 +328,10 @@ const Footer = () => (
          <div>
             <h4 className="text-gold-500 text-[10px] uppercase tracking-[0.2em] font-bold mb-6">Expertise</h4>
             <ul className="space-y-4 text-sm text-white/50">
-              <li><a href="#" className="hover:text-white transition-colors">Direito Corporativo</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Assessoria Tributária</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Holding e Offshores</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contencioso Estratégico</a></li>
+              <li>Direito Corporativo</li>
+              <li>Assessoria Tributária</li>
+              <li>Holding e Offshores</li>
+              <li>Contencioso Estratégico</li>
             </ul>
          </div>
          <div>
