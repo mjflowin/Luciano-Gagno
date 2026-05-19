@@ -105,8 +105,11 @@ const Header = () => {
     >
       <div className={`flex items-center justify-between mx-auto max-w-7xl px-8 py-4 rounded-full transition-all duration-500 ${scrolled ? 'glass-border shadow-2xl shadow-black/50' : 'bg-transparent'}`}>
         <a href="#home" className="flex items-center gap-3">
-          <Scale className="text-gold-500 w-6 h-6" />
-          <span className="font-serif text-lg font-bold tracking-tight text-white cursor-pointer hover:text-gold-500 transition-colors">LUCIANO GAGNO</span>
+          <img src="/logo-horizontal.png" alt="Luciano Gagno Advocacia" className="h-8 object-contain invert brightness-0 origin-left" style={{ filter: 'brightness(0) invert(1)' }} onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling!.classList.remove('hidden'); e.currentTarget.nextElementSibling!.classList.add('flex'); }} />
+          <div className="items-center gap-3 hidden">
+            <Scale className="text-gold-500 w-6 h-6" />
+            <span className="font-serif text-lg font-bold tracking-tight text-white cursor-pointer hover:text-gold-500 transition-colors">LUCIANO GAGNO</span>
+          </div>
         </a>
         <nav className="hidden lg:flex gap-10">
           {[
@@ -321,6 +324,7 @@ const Footer = () => (
     <div className="container mx-auto px-6 relative z-10">
        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
          <div className="lg:col-span-2">
+            <img src="/monogram.png" alt="LG Monogram" className="h-16 mb-8 object-contain opacity-50" style={{ filter: 'brightness(0) invert(1)' }} onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             <h3 className="font-serif text-4xl mb-6">Pronto para o<br/><span className="text-gold-500 italic">Próximo Nível?</span></h3>
             <p className="text-white/40 max-w-sm mb-8 font-light text-sm">Seu patrimônio não pode ficar à mercê do mercado. Solicite uma auditoria jurídica gratuita.</p>
             <Magnetic><a href="https://wa.me/5527998118489" target="_blank" rel="noreferrer" className="inline-block bg-white text-black px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-gold-500 transition-all">Contato Imediato</a></Magnetic>
@@ -335,8 +339,9 @@ const Footer = () => (
             </ul>
          </div>
          <div>
-            <h4 className="text-gold-500 text-[10px] uppercase tracking-[0.2em] font-bold mb-6">Conexão</h4>
+            <h4 className="text-gold-500 text-[10px] uppercase tracking-[0.2em] font-bold mb-6">Contato</h4>
             <ul className="space-y-4 text-sm text-white/50">
+              <li><a href="mailto:lucianogagno@hotmail.com" className="hover:text-white transition-colors">lucianogagno@hotmail.com</a></li>
               <li><a href="https://www.instagram.com/lucianogagnoadvogado/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Instagram</a></li>
               <li><a href="https://wa.me/5527998118489" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">WhatsApp</a></li>
             </ul>
