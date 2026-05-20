@@ -139,19 +139,21 @@ const Header = () => {
       >
         <a
           href="#home"
-          className="flex items-center justify-start shrink-0 mr-4"
+          className="flex items-center justify-start shrink-0 mr-4 py-2"
         >
-          {/* Logo no navbar com fallback para texto caso a imagem não exista */}
+          {/* Desktop Logo */}
           <img
-            src="/logo-horizontal.png"
+            src="https://i.imgur.com/C15kazS.png"
             alt="Luciano Gagno Advocacia"
-            className="h-10 md:h-12 w-auto max-w-[200px] md:max-w-[300px] lg:max-w-none object-contain invert brightness-0"
+            className="hidden md:block w-48 lg:w-56 max-w-[220px] h-auto object-contain invert brightness-0"
             style={{ filter: "brightness(0) invert(1)" }}
-            onError={(e) => {
-              e.currentTarget.style.display = "none";
-              e.currentTarget.nextElementSibling!.classList.remove("hidden");
-              e.currentTarget.nextElementSibling!.classList.add("flex");
-            }}
+          />
+          {/* Mobile Logo (Principal) */}
+          <img
+            src="https://i.imgur.com/uKCtwAh.png"
+            alt="Luciano Gagno Advocacia"
+            className="block md:hidden w-36 sm:w-44 h-auto object-contain invert brightness-0"
+            style={{ filter: "brightness(0) invert(1)" }}
           />
           <div className="items-center gap-3 hidden relative z-10 w-full pl-2">
             <Scale className="text-gold-500 w-6 h-6 shrink-0" />
@@ -610,15 +612,12 @@ const Footer = () => (
     />
     <div className="container mx-auto px-6 relative z-10">
       {/* Monograma centralizado acima da grid */}
-      <div className="mb-16 lg:mb-24 flex justify-center w-full">
+      <div className="mb-16 lg:mb-24 flex justify-center items-center w-full">
         <img
-          src="/monogram.png"
+          src="https://i.imgur.com/PEJULZn.png"
           alt="LG Monogram"
-          className="h-[120px] md:h-[160px] lg:h-[200px] w-auto max-w-full opacity-90 object-contain"
+          className="h-24 md:h-32 lg:h-40 w-auto opacity-90 object-contain mx-auto"
           style={{ filter: "brightness(0) invert(1)" }}
-          onError={(e) => {
-            e.currentTarget.parentElement!.style.display = "none";
-          }}
         />
       </div>
 
