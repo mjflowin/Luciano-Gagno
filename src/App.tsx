@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   motion,
   useScroll,
@@ -85,7 +85,14 @@ const CustomCursor = () => {
   );
 };
 
-const Magnetic = ({ children }: { children: React.ReactElement }) => {
+const Magnetic = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  key?: React.Key;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -132,66 +139,75 @@ const Header = () => {
       variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 w-full z-50 py-6 px-6 md:px-12 transition-all duration-500"
+      className="fixed top-0 w-full z-50 py-4 px-4 md:px-8 transition-all duration-500"
     >
       <div
-        className={`flex items-center justify-between mx-auto max-w-7xl px-8 py-4 rounded-full transition-all duration-500 ${scrolled ? "glass-border shadow-2xl shadow-black/50" : "bg-transparent"}`}
+        className={`flex flex-col items-center mx-auto max-w-7xl px-4 md:px-8 py-3 lg:py-5 rounded-2xl lg:rounded-3xl transition-all duration-500 relative ${scrolled ? "glass-border shadow-2xl shadow-black/50" : "bg-transparent"}`}
       >
-        <a
-          href="#home"
-          className="flex items-center justify-start shrink-0 mr-4 py-2"
-        >
-          {/* Desktop Logo */}
-          <img
-            src="https://i.imgur.com/C15kazS.png"
-            alt="Luciano Gagno Advocacia"
-            className="hidden md:block w-48 lg:w-56 max-w-[220px] h-auto object-contain invert brightness-0"
-            style={{ filter: "brightness(0) invert(1)" }}
-          />
-          {/* Mobile Logo (Principal) */}
-          <img
-            src="https://i.imgur.com/uKCtwAh.png"
-            alt="Luciano Gagno Advocacia"
-            className="block md:hidden w-36 sm:w-44 h-auto object-contain invert brightness-0"
-            style={{ filter: "brightness(0) invert(1)" }}
-          />
-          <div className="items-center gap-3 hidden relative z-10 w-full pl-2">
-            <Scale className="text-gold-500 w-6 h-6 shrink-0" />
-            <span className="font-serif text-base font-bold tracking-tight text-white cursor-pointer hover:text-gold-500 transition-colors whitespace-nowrap">
-              LUCIANO GAGNO
-            </span>
-          </div>
-        </a>
-        <nav className="hidden lg:flex gap-10">
-          {[
-            { name: "Home", id: "#home" },
-            { name: "Soluções", id: "#solucoes" },
-            { name: "Método", id: "#método" },
-            { name: "Sobre", id: "#sobre" },
-          ].map((l) => (
-            <Magnetic key={l.name}>
+        {/* Top Row: Logo & Mobile Menu */}
+        <div className="flex items-center justify-center w-full relative min-h-[60px] sm:min-h-[70px] lg:min-h-0 lg:py-2">
+          {/* Decorative lines purely for desktop */}
+          <div className="hidden lg:block absolute left-0 top-0 lg:top-1/2 lg:-translate-y-1/2 w-[30%] xl:w-[35%] h-[1px] bg-gradient-to-r from-transparent to-white/10" />
+          <div className="hidden lg:block absolute right-0 top-0 lg:top-1/2 lg:-translate-y-1/2 w-[30%] xl:w-[35%] h-[1px] bg-gradient-to-l from-transparent to-white/10" />
+
+          <a
+            href="#home"
+            className="absolute lg:relative lg:left-0 lg:top-0 lg:translate-x-0 lg:translate-y-0 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shrink-0 z-10"
+          >
+            {/* Desktop Logo */}
+            <img
+              src="https://i.imgur.com/C15kazS.png"
+              alt="Luciano Gagno Advocacia"
+              className="hidden lg:block w-48 xl:w-56 max-w-[220px] h-auto object-contain invert brightness-0"
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
+            {/* Mobile Logo (Principal) */}
+            <img
+              src="https://i.imgur.com/C15kazS.png"
+              alt="Luciano Gagno Advocacia"
+              className="block lg:hidden w-40 md:w-48 h-auto object-contain invert brightness-0"
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
+          </a>
+
+          {/* Mobile Menu Button */}
+          <button className="lg:hidden absolute right-0 text-white flex items-center justify-center p-2 rounded-full bg-white/5 border border-white/10 shrink-0">
+            <Menu size={20} />
+          </button>
+        </div>
+
+        {/* Desktop Navigation Row */}
+        <div className="hidden lg:flex w-full items-center justify-center mt-6 relative xl:px-4">
+          <nav className="flex gap-6 xl:gap-10">
+            {[
+              { name: "Home", id: "#home" },
+              { name: "Soluções", id: "#solucoes" },
+              { name: "Método", id: "#método" },
+              { name: "Sobre", id: "#sobre" },
+            ].map((l) => (
+              <Magnetic key={l.name}>
+                <a
+                  href={l.id}
+                  className="text-[10px] xl:text-xs uppercase tracking-[0.2em] font-medium text-white/50 hover:text-white transition-colors"
+                >
+                  {l.name}
+                </a>
+              </Magnetic>
+            ))}
+          </nav>
+          <div className="absolute right-0 xl:right-4">
+            <Magnetic>
               <a
-                href={l.id}
-                className="text-[10px] uppercase tracking-[0.2em] font-medium text-white/50 hover:text-white transition-colors"
+                href="https://wa.me/5527998118489"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 bg-white/5 border border-white/10 hover:bg-gold-500 hover:text-black hover:border-gold-500 px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all"
               >
-                {l.name}
+                Auditoria <ArrowUpRight size={14} />
               </a>
             </Magnetic>
-          ))}
-        </nav>
-        <Magnetic>
-          <a
-            href="https://wa.me/5527998118489"
-            target="_blank"
-            rel="noreferrer"
-            className="hidden lg:flex items-center gap-2 bg-white/5 border border-white/10 hover:bg-gold-500 hover:text-black hover:border-gold-500 px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all"
-          >
-            Auditoria <ArrowUpRight size={14} />
-          </a>
-        </Magnetic>
-        <button className="lg:hidden text-white">
-          <Menu />
-        </button>
+          </div>
+        </div>
       </div>
     </motion.header>
   );
@@ -612,11 +628,11 @@ const Footer = () => (
     />
     <div className="container mx-auto px-6 relative z-10">
       {/* Monograma centralizado acima da grid */}
-      <div className="mb-16 lg:mb-24 flex justify-center items-center w-full">
+      <div className="mb-20 lg:mb-32 flex justify-center items-center w-full">
         <img
           src="https://i.imgur.com/PEJULZn.png"
           alt="LG Monogram"
-          className="h-24 md:h-32 lg:h-40 w-auto opacity-90 object-contain mx-auto"
+          className="h-40 md:h-52 lg:h-72 w-auto opacity-90 object-contain mx-auto invert brightness-0"
           style={{ filter: "brightness(0) invert(1)" }}
         />
       </div>
