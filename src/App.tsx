@@ -139,13 +139,13 @@ const Header = () => {
       >
         <a
           href="#home"
-          className="flex items-center justify-start relative w-[180px] md:w-[250px] h-[50px] shrink-0"
+          className="flex items-center justify-start shrink-0 mr-4"
         >
           {/* Logo no navbar com fallback para texto caso a imagem não exista */}
           <img
             src="/logo-horizontal.png"
             alt="Luciano Gagno Advocacia"
-            className="absolute top-1/2 left-0 -translate-y-1/2 w-[350px] md:w-[450px] lg:w-[500px] max-w-none invert brightness-0 pointer-events-none -ml-[40px] md:-ml-[55px] lg:-ml-[65px]"
+            className="h-10 md:h-12 w-auto max-w-[200px] md:max-w-[300px] lg:max-w-none object-contain invert brightness-0"
             style={{ filter: "brightness(0) invert(1)" }}
             onError={(e) => {
               e.currentTarget.style.display = "none";
@@ -609,12 +609,12 @@ const Footer = () => (
       }}
     />
     <div className="container mx-auto px-6 relative z-10">
-      {/* Monograma acima da grid para garantir alinhamento das colunas inferiores */}
-      <div className="mb-10 lg:mb-16 flex justify-start relative h-[100px] w-full overflow-visible">
+      {/* Monograma centralizado acima da grid */}
+      <div className="mb-16 lg:mb-24 flex justify-center w-full">
         <img
           src="/monogram.png"
           alt="LG Monogram"
-          className="absolute top-1/2 left-0 -translate-y-[45%] h-[200px] md:h-[280px] lg:h-[350px] w-auto max-w-none opacity-90 object-contain -ml-[60px] md:-ml-[80px] lg:-ml-[100px]"
+          className="h-[120px] md:h-[160px] lg:h-[200px] w-auto max-w-full opacity-90 object-contain"
           style={{ filter: "brightness(0) invert(1)" }}
           onError={(e) => {
             e.currentTarget.parentElement!.style.display = "none";
@@ -622,9 +622,9 @@ const Footer = () => (
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24 items-start">
         <div className="lg:col-span-2">
-          <h3 className="font-serif text-4xl mb-6">
+          <h3 className="font-serif text-4xl mb-6 lg:-mt-2">
             Pronto para o<br />
             <span className="text-gold-500 italic">Próximo Nível?</span>
           </h3>
