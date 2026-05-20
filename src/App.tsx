@@ -138,13 +138,24 @@ const Header = () => {
         className={`flex items-center justify-between mx-auto max-w-7xl px-8 py-4 rounded-full transition-all duration-500 ${scrolled ? "glass-border shadow-2xl shadow-black/50" : "bg-transparent"}`}
       >
         <a href="#home" className="flex items-center justify-start pl-2">
-          {/* Aumentando o tamanho da logo no navbar */}
+          {/* Logo no navbar com fallback para texto caso a imagem não exista */}
           <img
             src="/logo-horizontal.png"
             alt="Luciano Gagno Advocacia"
-            className="h-[50px] md:h-[70px] lg:h-[80px] w-auto object-contain invert brightness-0 transform origin-left md:scale-[1.3]"
+            className="h-[40px] md:h-[50px] lg:h-[60px] w-auto object-contain invert brightness-0"
             style={{ filter: "brightness(0) invert(1)" }}
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+              e.currentTarget.nextElementSibling!.classList.remove("hidden");
+              e.currentTarget.nextElementSibling!.classList.add("flex");
+            }}
           />
+          <div className="items-center gap-3 hidden relative z-10 w-full pl-2">
+            <Scale className="text-gold-500 w-6 h-6 shrink-0" />
+            <span className="font-serif text-base font-bold tracking-tight text-white cursor-pointer hover:text-gold-500 transition-colors whitespace-nowrap">
+              LUCIANO GAGNO
+            </span>
+          </div>
         </a>
         <nav className="hidden lg:flex gap-10">
           {[
@@ -597,13 +608,16 @@ const Footer = () => (
     <div className="container mx-auto px-6 relative z-10">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
         <div className="lg:col-span-2">
-          <div className="mb-16 md:mb-20 flex justify-start">
-            {/* Aumentando o tamanho da logo no rodapé e ajustando as margens para não ficar perto do texto */}
+          <div className="mb-12 md:mb-16 flex justify-start">
+            {/* Logo no rodapé com tamanho ajustado e fallback */}
             <img
               src="/monogram.png"
               alt="LG Monogram"
-              className="h-[150px] md:h-[200px] lg:h-[240px] w-auto object-contain opacity-90 transform origin-bottom-left md:scale-[1.2]"
+              className="h-[120px] md:h-[160px] lg:h-[180px] w-auto object-contain opacity-90"
               style={{ filter: "brightness(0) invert(1)" }}
+              onError={(e) => {
+                e.currentTarget.parentElement!.style.display = "none";
+              }}
             />
           </div>
           <h3 className="font-serif text-4xl mb-6">
