@@ -137,12 +137,15 @@ const Header = () => {
       <div
         className={`flex items-center justify-between mx-auto max-w-7xl px-8 py-4 rounded-full transition-all duration-500 ${scrolled ? "glass-border shadow-2xl shadow-black/50" : "bg-transparent"}`}
       >
-        <a href="#home" className="flex items-center justify-start pl-2">
+        <a
+          href="#home"
+          className="flex items-center justify-start relative w-[180px] md:w-[250px] h-[50px] shrink-0"
+        >
           {/* Logo no navbar com fallback para texto caso a imagem não exista */}
           <img
             src="/logo-horizontal.png"
             alt="Luciano Gagno Advocacia"
-            className="h-[40px] md:h-[50px] lg:h-[60px] w-auto object-contain invert brightness-0"
+            className="absolute top-1/2 left-0 -translate-y-1/2 w-[350px] md:w-[450px] lg:w-[500px] max-w-none invert brightness-0 pointer-events-none -ml-[40px] md:-ml-[55px] lg:-ml-[65px]"
             style={{ filter: "brightness(0) invert(1)" }}
             onError={(e) => {
               e.currentTarget.style.display = "none";
@@ -606,20 +609,21 @@ const Footer = () => (
       }}
     />
     <div className="container mx-auto px-6 relative z-10">
+      {/* Monograma acima da grid para garantir alinhamento das colunas inferiores */}
+      <div className="mb-10 lg:mb-16 flex justify-start relative h-[100px] w-full overflow-visible">
+        <img
+          src="/monogram.png"
+          alt="LG Monogram"
+          className="absolute top-1/2 left-0 -translate-y-[45%] h-[200px] md:h-[280px] lg:h-[350px] w-auto max-w-none opacity-90 object-contain -ml-[60px] md:-ml-[80px] lg:-ml-[100px]"
+          style={{ filter: "brightness(0) invert(1)" }}
+          onError={(e) => {
+            e.currentTarget.parentElement!.style.display = "none";
+          }}
+        />
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
         <div className="lg:col-span-2">
-          <div className="mb-12 md:mb-16 flex justify-start">
-            {/* Logo no rodapé com tamanho ajustado e fallback */}
-            <img
-              src="/monogram.png"
-              alt="LG Monogram"
-              className="h-[120px] md:h-[160px] lg:h-[180px] w-auto object-contain opacity-90"
-              style={{ filter: "brightness(0) invert(1)" }}
-              onError={(e) => {
-                e.currentTarget.parentElement!.style.display = "none";
-              }}
-            />
-          </div>
           <h3 className="font-serif text-4xl mb-6">
             Pronto para o<br />
             <span className="text-gold-500 italic">Próximo Nível?</span>
@@ -660,7 +664,7 @@ const Footer = () => (
                 href="mailto:lucianogagno@hotmail.com"
                 className="hover:text-white transition-colors"
               >
-                lucianogagno@hotmail.com
+                E-mail
               </a>
             </li>
             <li>
