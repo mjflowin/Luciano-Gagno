@@ -127,6 +127,7 @@ const Header = () => {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -135,81 +136,106 @@ const Header = () => {
   });
 
   return (
-    <motion.header
-      variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
-      animate={hidden ? "hidden" : "visible"}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 w-full z-50 py-4 px-4 md:px-8 transition-all duration-500"
-    >
-      <div
-        className={`flex flex-col items-center mx-auto max-w-7xl px-4 md:px-8 py-3 lg:py-5 rounded-2xl lg:rounded-3xl transition-all duration-500 relative ${scrolled ? "glass-border shadow-2xl shadow-black/50" : "bg-transparent"}`}
+    <>
+      <motion.header
+        variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
+        animate={hidden && !menuOpen ? "hidden" : "visible"}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed top-0 w-full z-50 py-4 px-4 md:px-8 transition-all duration-500"
       >
-        {/* Top Row: Logo & Mobile Menu */}
-        <div className="flex items-center justify-center w-full relative min-h-[60px] sm:min-h-[70px] lg:min-h-0 lg:py-2">
-          {/* Decorative lines purely for desktop */}
-          <div className="hidden lg:block absolute left-0 top-0 lg:top-1/2 lg:-translate-y-1/2 w-[30%] xl:w-[35%] h-[1px] bg-gradient-to-r from-transparent to-white/10" />
-          <div className="hidden lg:block absolute right-0 top-0 lg:top-1/2 lg:-translate-y-1/2 w-[30%] xl:w-[35%] h-[1px] bg-gradient-to-l from-transparent to-white/10" />
+        <div
+          className={`flex items-center justify-center mx-auto max-w-7xl px-4 md:px-8 py-3 lg:py-5 rounded-full transition-all duration-500 relative ${scrolled ? "glass-border shadow-2xl shadow-black/50" : "bg-transparent"}`}
+        >
+          <div className="flex items-center justify-center w-full relative min-h-[50px] sm:min-h-[60px] lg:min-h-[70px]">
+            {/* Decorative lines purely for desktop */}
+            <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 w-[30%] xl:w-[35%] h-[1px] bg-gradient-to-r from-transparent to-white/10" />
+            <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[30%] xl:w-[35%] h-[1px] bg-gradient-to-l from-transparent to-white/10" />
 
-          <a
-            href="#home"
-            className="absolute lg:relative lg:left-0 lg:top-0 lg:translate-x-0 lg:translate-y-0 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shrink-0 z-10"
-          >
-            {/* Desktop Logo */}
-            <img
-              src="https://i.imgur.com/C15kazS.png"
-              alt="Luciano Gagno Advocacia"
-              className="hidden lg:block w-48 xl:w-56 max-w-[220px] h-auto object-contain invert brightness-0"
-              style={{ filter: "brightness(0) invert(1)" }}
-            />
-            {/* Mobile Logo (Principal) */}
-            <img
-              src="https://i.imgur.com/C15kazS.png"
-              alt="Luciano Gagno Advocacia"
-              className="block lg:hidden w-40 md:w-48 h-auto object-contain invert brightness-0"
-              style={{ filter: "brightness(0) invert(1)" }}
-            />
-          </a>
+            <a
+              href="#home"
+              onClick={() => setMenuOpen(false)}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shrink-0 z-10"
+            >
+              {/* Desktop Logo */}
+              <img
+                src="https://i.imgur.com/C15kazS.png"
+                alt="Luciano Gagno Advocacia"
+                className="hidden lg:block w-48 xl:w-56 max-w-[220px] h-auto object-contain invert brightness-0"
+                style={{ filter: "brightness(0) invert(1)" }}
+              />
+              {/* Mobile Logo (Principal) */}
+              <img
+                src="https://i.imgur.com/C15kazS.png"
+                alt="Luciano Gagno Advocacia"
+                className="block lg:hidden w-40 md:w-48 h-auto object-contain invert brightness-0"
+                style={{ filter: "brightness(0) invert(1)" }}
+              />
+            </a>
 
-          {/* Mobile Menu Button */}
-          <button className="lg:hidden absolute right-0 text-white flex items-center justify-center p-2 rounded-full bg-white/5 border border-white/10 shrink-0">
-            <Menu size={20} />
-          </button>
-        </div>
-
-        {/* Desktop Navigation Row */}
-        <div className="hidden lg:flex w-full items-center justify-center mt-6 relative xl:px-4">
-          <nav className="flex gap-6 xl:gap-10">
-            {[
-              { name: "Home", id: "#home" },
-              { name: "Soluções", id: "#solucoes" },
-              { name: "Método", id: "#método" },
-              { name: "Sobre", id: "#sobre" },
-            ].map((l) => (
-              <Magnetic key={l.name}>
-                <a
-                  href={l.id}
-                  className="text-[10px] xl:text-xs uppercase tracking-[0.2em] font-medium text-white/50 hover:text-white transition-colors"
-                >
-                  {l.name}
-                </a>
-              </Magnetic>
-            ))}
-          </nav>
-          <div className="absolute right-0 xl:right-4">
-            <Magnetic>
-              <a
-                href="https://wa.me/5527998118489"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 bg-white/5 border border-white/10 hover:bg-gold-500 hover:text-black hover:border-gold-500 px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all"
-              >
-                Auditoria <ArrowUpRight size={14} />
-              </a>
-            </Magnetic>
+            {/* Menu Button */}
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="absolute right-0 text-white flex items-center justify-center p-3 rounded-full bg-white/5 border border-white/10 hover:bg-gold-500 hover:text-black hover:border-gold-500 transition-all z-20"
+            >
+              <Menu size={24} />
+            </button>
           </div>
         </div>
-      </div>
-    </motion.header>
+      </motion.header>
+
+      {/* Full Screen Menu Overlay */}
+      <motion.div
+        initial="closed"
+        animate={menuOpen ? "open" : "closed"}
+        variants={{
+          open: { opacity: 1, pointerEvents: "auto" },
+          closed: { opacity: 0, pointerEvents: "none" },
+        }}
+        transition={{ duration: 0.5 }}
+        className="fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl flex flex-col justify-center items-center"
+      >
+        <button
+          onClick={() => setMenuOpen(false)}
+          className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors p-2 z-50"
+        >
+          <X size={32} />
+        </button>
+
+        <nav className="flex flex-col items-center gap-10">
+          {[
+            { name: "Home", id: "#home" },
+            { name: "Soluções", id: "#solucoes" },
+            { name: "Método", id: "#método" },
+            { name: "Sobre", id: "#sobre" },
+          ].map((l, i) => (
+            <motion.a
+              key={l.name}
+              href={l.id}
+              onClick={() => setMenuOpen(false)}
+              initial={{ y: 20, opacity: 0 }}
+              animate={menuOpen ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+              transition={{ delay: i * 0.1 + 0.2, duration: 0.5 }}
+              className="text-4xl md:text-6xl font-serif text-white hover:text-gold-500 transition-colors cursor-pointer block"
+            >
+              {l.name}
+            </motion.a>
+          ))}
+
+          <motion.a
+            href="https://wa.me/5527998118489"
+            target="_blank"
+            rel="noreferrer"
+            initial={{ y: 20, opacity: 0 }}
+            animate={menuOpen ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            className="mt-8 flex items-center gap-2 bg-gold-500 text-black px-8 py-4 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white transition-colors"
+          >
+            Auditoria<span className="hidden sm:inline"> Gratuita</span>{" "}
+            <ArrowUpRight size={18} />
+          </motion.a>
+        </nav>
+      </motion.div>
+    </>
   );
 };
 
@@ -630,7 +656,7 @@ const Footer = () => (
       {/* Monograma centralizado acima da grid */}
       <div className="mb-20 lg:mb-32 flex justify-center items-center w-full">
         <img
-          src="https://i.imgur.com/PEJULZn.png"
+          src="https://i.imgur.com/zPJwtRE.png"
           alt="LG Monogram"
           className="h-40 md:h-52 lg:h-72 w-auto opacity-90 object-contain mx-auto invert brightness-0"
           style={{ filter: "brightness(0) invert(1)" }}
